@@ -1,64 +1,64 @@
 [package]
 name = "cargo-packager"
-version = "0.1.0"
+version = "0.1.1"
 description = "Rust executable packager and bundler CLI and library."
 authors = [
-    "CrabNebula Ltd.",
-    "Tauri Programme within The Commons Conservancy",
-    "George Burton <burtonageo@gmail.com>",
+  "CrabNebula Ltd.",
+  "Tauri Programme within The Commons Conservancy",
+  "George Burton <burtonageo@gmail.com>"
 ]
 edition = "2021"
 license = "Apache-2.0 OR MIT"
-keywords = ["bundle", "package", "cargo"]
+keywords = [ "bundle", "package", "cargo" ]
 categories = [
-    "command-line-interface",
-    "command-line-utilities",
-    "development-tools::cargo-plugins",
-    "development-tools::build-utils",
-    "os",
+  "command-line-interface",
+  "command-line-utilities",
+  "development-tools::cargo-plugins",
+  "development-tools::build-utils",
+  "os"
 ]
 repository = "https://github.com/crabnebula-dev/cargo-packager"
 
-[features]
-default = ["cli"]
-cli = ["clap", "cargo-packager-config/clap", "tracing", "tracing-subscriber"]
-tracing = ["dep:tracing"]
-
 [package.metadata.docs.rs]
-rustdoc-args = ["--cfg", "doc_cfg"]
+rustdoc-args = [ "--cfg", "doc_cfg" ]
 default-target = "x86_64-unknown-linux-gnu"
 targets = [
-    "x86_64-pc-windows-msvc",
-    "x86_64-unknown-linux-gnu",
-    "x86_64-apple-darwin",
+  "x86_64-pc-windows-msvc",
+  "x86_64-unknown-linux-gnu",
+  "x86_64-apple-darwin"
 ]
 
+[features]
+default = [ "cli" ]
+cli = [
+  "clap",
+  "cargo-packager-config/clap",
+  "tracing",
+  "tracing-subscriber"
+]
+tracing = [ "dep:tracing" ]
+
 [build-dependencies]
-cargo-packager-config = { path = "../config", version = "0.0.0" }
-serde_json.workspace = true
-schemars.workspace = true
+cargo-packager-config = { path = "../config", version = "0.1.0" }
+
+  [build-dependencies.serde_json]
+  workspace = true
+
+  [build-dependencies.schemars]
+  workspace = true
 
 [dependencies]
-cargo-packager-config = { path = "../config", version = "0.0.0" }
-thiserror.workspace = true
-serde.workspace = true
-serde_json.workspace = true
-dunce.workspace = true
-dirs.workspace = true
-semver.workspace = true
-base64.workspace = true
-clap = { workspace = true, optional = true, features = ["env"] }
+cargo-packager-config = { path = "../config", version = "0.1.0" }
+clap = { workspace = true, optional = true, features = [ "env" ] }
 tracing = { workspace = true, optional = true }
-tracing-subscriber = { version = "0.3", optional = true, features = [
-    "env-filter",
-] }
+tracing-subscriber = { version = "0.3", optional = true, features = [ "env-filter" ] }
 toml = "0.8"
 cargo_metadata = "0.18"
 ureq = "2.8"
 hex = "0.4"
 sha1 = "0.10"
 sha2 = "0.10"
-zip = { version = "0.6", default-features = false, features = ["deflate"] }
+zip = { version = "0.6", default-features = false, features = [ "deflate" ] }
 handlebars = "4.4"
 glob = "0.3"
 relative-path = "1.9"
@@ -68,15 +68,39 @@ minisign = "0.7"
 tar = "0.4"
 libflate = "2.0"
 
+  [dependencies.thiserror]
+  workspace = true
+
+  [dependencies.serde]
+  workspace = true
+
+  [dependencies.serde_json]
+  workspace = true
+
+  [dependencies.dunce]
+  workspace = true
+
+  [dependencies.dirs]
+  workspace = true
+
+  [dependencies.semver]
+  workspace = true
+
+  [dependencies.base64]
+  workspace = true
+
 [target."cfg(target_os = \"windows\")".dependencies]
 winreg = "0.51"
 once_cell = "1.18"
-uuid = { version = "1", features = ["v4", "v5"] }
+uuid = { version = "1", features = [ "v4", "v5" ] }
 regex = "1.9"
 
-[target."cfg(target_os = \"windows\")".dependencies.windows-sys]
-version = "0.48"
-features = ["Win32_System_SystemInformation", "Win32_System_Diagnostics_Debug"]
+  [target."cfg(target_os = \"windows\")".dependencies.windows-sys]
+  version = "0.48"
+  features = [
+  "Win32_System_SystemInformation",
+  "Win32_System_Diagnostics_Debug"
+]
 
 [target."cfg(any(target_os = \"linux\", target_os = \"dragonfly\", target_os = \"freebsd\", target_os = \"netbsd\", target_os = \"openbsd\"))".dependencies]
 image = "0.24"
@@ -86,7 +110,7 @@ ar = "0.9"
 
 [target."cfg(target_os = \"macos\")".dependencies]
 icns = { package = "tauri-icns", version = "0.1" }
-time = { version = "0.3", features = ["formatting"] }
+time = { version = "0.3", features = [ "formatting" ] }
 plist = "1"
 image = "0.24"
 tempfile = "3"
